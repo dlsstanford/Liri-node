@@ -1,11 +1,10 @@
 require("dotenv").config();
+var request = require("request");
 var Twitter = require('twitter');
-// var Spotify = require('spotify');
-var omdb = require('omdb');
+var Spotify = require('node-spotify-api');
 
 var keys = require("./keys.js");
-
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 var action = process.argv[2];
@@ -34,31 +33,42 @@ switch (action) {
 function tweets() {
     client.get('statuses/user_timeline', function (error, tweets, response) {
         if (!error) {
-            for (var i=0;i<tweets.length;i++)
-            console.log("Tweet " + [i + 1] + ": " + tweets[i].text);
+            for (var i = 0; i < tweets.length; i++)
+                console.log("Tweet " + [i + 1] + ": " + tweets[i].text);
             console.log("---------------------------");
-            console.log("Created on: " + tweets[i].created_at);
+            console.log("Created on: " + JSON.stringify(tweets[i]).created_at);
         }
     });
 }
 
 function movie() {
-    omdb.search('saw', function(err, movies) {
-        if(err) {
-            return console.error(err);
-        }
-     
-        if(movies.length < 1) {
-            return console.log('No movies were found!');
-        } else {
-     
-
-            console.log('%s (%d)', movie.title, movie.year);
+    movieName = encodeURI(process.argv[3])
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    request(queryUrl, function (error, response, body) {
+        if (!error) {
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Release Year: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+            console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Producing Country: " + JSON.parse(body).Country);
+            console.log("Language(s): " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors : " + JSON.parse(body).Actors);
         }
     });
-     
 }
 
+function spotifySong() {
+            spotify.search({ type: 'track', query: value, limit: 1 }, function (err, data) {
+                if (err) {
+                    return console.log('Error occurred: ' + err);
+                }
+
+                console.log(JSON.stringify(data.tracks.items, null, 2));
+
+
+            });
+        }
 // twitter (my-tweets)
 // display last 20 tweets
 // tweet time stamp
