@@ -9,6 +9,7 @@ var keys = require("./keys.js");
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
+
 var action = process.argv[2];
 var value = process.argv[3];
 
@@ -74,25 +75,10 @@ function spotifySong() {
     if (err) {
       return console.log("Error occurred: " + err);
     }
-
-    console.log(
-      JSON.stringify(
-        "Artist Name: " + data.tracks.items[0].album.artists[0].name,
-        null,
-        2
-      )
-    );
+    console.log(JSON.stringify("Artist Name: " + data.tracks.items[0].album.artists[0].name, null, 2));
     console.log(JSON.stringify("Song: " + data.tracks.items[0].name, null, 2));
-    console.log(
-      JSON.stringify("Album: " + data.tracks.items[0].album.name, null, 2)
-    );
-    console.log(
-      JSON.stringify(
-        "Preview Link: " + data.tracks.items[0].preview_url,
-        null,
-        2
-      )
-    );
+    console.log(JSON.stringify("Album: " + data.tracks.items[0].album.name, null, 2));
+    console.log(JSON.stringify("Preview Link: " + data.tracks.items[0].preview_url,null, 2));
   });
 }
 
@@ -119,3 +105,23 @@ function goHead() {
     }
   });
 }
+
+// twitter (my-tweets)
+// display last 20 tweets
+// tweet time stamp
+
+// spotify (spotify-this-song -->)
+// 1. artist
+// 2. song name
+// 3. preview link
+// 4. album
+
+// ombd (movie-this -->)
+// * Title of the movie.
+// * Year the movie came out.
+// * IMDB Rating of the movie.
+// * Rotten Tomatoes Rating of the movie.
+// * Country where the movie was produced.
+// * Language of the movie.
+// * Plot of the movie.
+// * Actors in the movie.
