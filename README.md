@@ -2,6 +2,8 @@
 
 LIRI (Language Interpretation and Recognition Interface) is a command line node application that takes in parameters and gives you back data. The commands provided allow the user to pull song, movie, and tweet information from the corresponding Spotify, OMDB, or Twitter API.
 
+![liri](/images/6.jpg)
+
 ## Technologies Used
 - Node.js
 
