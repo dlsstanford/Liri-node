@@ -30,11 +30,12 @@ Full Stack web application that allows users to view and leave comments on the l
 ## Commands
 
 LIRI can run the 3 following commands:
+
 >node liri.js my-tweets
 
 - This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
->node liri.js spotify-this-song '<song name here>'
+>node liri.js spotify-this-song 'song name here'
   
 - This will show the following information about the song in your terminal/bash window
 
@@ -43,7 +44,7 @@ LIRI can run the 3 following commands:
   - A preview link of the song from Spotify
   - The album that the song is from
   
-> node liri.js movie-this '<movie name here>'
+> node liri.js movie-this 'movie name here'
 - This will show the following information about the movie in your terminal/bash window
   - Title of the movie.
   - Year the movie came out.
